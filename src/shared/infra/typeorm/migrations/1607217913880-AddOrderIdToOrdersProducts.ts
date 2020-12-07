@@ -1,4 +1,3 @@
-import { table } from 'console';
 import {
   MigrationInterface,
   QueryRunner,
