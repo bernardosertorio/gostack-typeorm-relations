@@ -1,5 +1,10 @@
 import { query } from 'express';
-import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey,  } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  TableColumn,
+  TableForeignKey,
+} from 'typeorm';
 
 export default class AddProductIdToOrdersProducts1607219060434
   implements MigrationInterface {
@@ -10,8 +15,8 @@ export default class AddProductIdToOrdersProducts1607219060434
         name: 'product_id',
         type: 'uuid',
         isNullable: true,
-      })
-    )
+      }),
+    );
 
     await queryRunner.createForeignKey(
       'orders_products',
@@ -21,12 +26,16 @@ export default class AddProductIdToOrdersProducts1607219060434
         referencedColumnNames: ['id'],
         referencedTableName: 'products',
         onDelete: 'SET NULL',
-      })
-    )
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('orders_products', 'OrdersProductsProduct'),
-    await queryRunner.dropForeignKey('orders_products', 'product_id'),
+    await queryRunner.dropForeignKey(
+      'orders_products',
+      'OrdersProductsProduct',
+    );
+
+    await queryRunner.dropForeignKey('orders_products', 'product_id');
   }
 }
